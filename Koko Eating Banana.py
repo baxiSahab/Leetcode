@@ -1,16 +1,25 @@
-def minEatingSpeed(piles: list[int], h: int, l = 0 , r = None) -> int:
-    if sum(piles) <= h: return 1 # base case where we can just use 1
-    if len(piles) == h: return max(piles) # another base case where we have to use the max
-    if r == None: r = max(piles)
-    else:
+def minEatingSpeed(piles: list[int], h: int) -> int:
+    l , r = 1 , max(piles)
+    # if sum(piles) <= h: return 1 # base case where we can just use 1
+    # if len(piles) == h: return max(piles) # another base case where we have to use the max
+    min_k = []
+    # if r == None: r = max(piles)
+    while l<=r:
         k = (l+r) // 2
-        if canFinish(piles , k , h) == True: return minEatingSpeed(piles , h , l = l , r = k-1)
-        else: return minEatingSpeed(piles , h , l = k+1 , r = r)
+        if canFinish(piles , k , h) == True: 
+            #return minEatingSpeed(piles , h , l = l , r = k-1)
+            result = k
+            r = k - 1
+        else: 
+            # return minEatingSpeed(piles , h , l = k+1 , r = r)
+            l = k + 1
+    return result
 
 def canFinish(piles , k , h):
     hours = []
     for pile in piles:
-        hours.append( -(-pile)//k )
+        hours.append(-((-pile)//k)) # extra bracket doesnt make it bug out
+        # print(-((-pile)//k))
     if sum(hours) <= h: return True
     else: return False
 

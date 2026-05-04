@@ -1,3 +1,10 @@
-matrix = [[1,3,5,7],[10,11,16,20],[23,30,34,60]]
+class ListNode:
+    def __init__(self, val=0, next=None):
+        self.val = val
+        self.next = next
 
-print(len(matrix[0]))
+
+dummy = ListNode(0)
+dummy = dummy.next
+print(dummy.val)
+
