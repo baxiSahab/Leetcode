@@ -1,0 +1,84 @@
+class ListNode:
+    def __init__(self, val=0, next=None):
+        self.val = val
+        self.next = next
+
+def removeNthFromEnd(head: ListNode, n: int) -> ListNode:
+    if not head or not head.next:
+        return
+    
+    counter = 0
+    slow , fast = head , head
+    while counter < n:
+        prev_fast = fast
+        fast = fast.next
+        counter+=1
+
+    if fast == None:
+        # prev_fast.next = None
+        return head.next
+    
+    while fast:
+        prev = slow
+
+        slow = slow.next
+        fast = fast.next
+
+    prev.next = slow.next
+    return head
+    
+    # if not head:
+    #     return
+
+    # curr = head
+    # nodes = []
+    # while curr:
+    #     nodes.append(curr)
+    #     curr = curr.next
+
+    # i , j = 0 , len(nodes)
+    # target = j - n
+
+    # # while n > j:
+    # #     n = n-j
+    
+    # if target ==  0:
+    #     copy = head.next
+    #     # nodes[-1].next = nodes[1]
+    #     return copy
+    # elif target == j-1:
+    #     nodes[target-1].next = None
+    #     return head
+    # else:
+    #     nodes[target-1].next = nodes[target+1]
+    #     return head
+
+# --- Test Harness ---
+def build(vals):
+    dummy = ListNode(0)
+    cur = dummy
+    for v in vals:
+        cur.next = ListNode(v)
+        cur = cur.next
+    return dummy.next
+
+def to_list(head):
+    result = []
+    while head:
+        result.append(head.val)
+        head = head.next
+    return result
+
+tests = [
+    ([1, 2, 3, 4, 5], 2, [1, 2, 3, 5]),   # remove 4th node
+    ([1, 2, 3, 4, 5], 1, [1, 2, 3, 4]),   # remove last node
+    ([1, 2, 3, 4, 5], 5, [2, 3, 4, 5]),   # remove head
+    ([1],             1, []),              # single node
+    ([1, 2],          1, [1]),             # two nodes, remove last
+]
+
+for vals, n, expected in tests:
+    head = build(vals)
+    result = to_list(removeNthFromEnd(head, n))
+    status = "PASS" if result == expected else "FAIL"
+    print(f"{status} | Input: {vals}, n={n} | Expected: {expected} | Got: {result}")
