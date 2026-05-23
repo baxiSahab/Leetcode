@@ -6,7 +6,22 @@ class TreeNode:
 
 class Solution:
     def lowestCommonAncestor(self, root: TreeNode, p: TreeNode, q: TreeNode) -> TreeNode:
-        pass
+        
+        node = root
+        nn = node.val
+        pp = p.val
+        qq = q.val
+        if nn > max(pp , qq): # if we are larger go left for smaller
+            return self.lowestCommonAncestor(node.left , p , q)
+        
+        if nn < min(pp , qq):
+            return self.lowestCommonAncestor(node.right , p , q)
+
+        elif nn >= min(pp,qq) and nn <= max(pp,qq):
+            return node
+
+        
+
 
 
 # ── Build helpers ──────────────────────────────────────────────
