@@ -15,12 +15,18 @@ def twoSum(nums, target):
         List of two indices [i, j] where nums[i] + nums[j] == target
     """
     # YOUR CODE HERE
-    for i in range(len(nums)):
-        remainder = target - nums[i]
 
-        if remainder in nums[i+1:]:
-            return [i,nums.index(remainder, i+1)]
-# Test cases
+    hashmap ={}
+
+    for key , value in enumerate(nums):
+        hashmap[value] = key
+
+    for i , n in enumerate(nums):
+        remainder = target - n
+        if remainder in hashmap and hashmap[remainder] != i:
+            return [ i , hashmap[remainder] ]
+    
+
 test_cases = [
     # (nums, target, expected_output)
     ([2, 7, 11, 15], 9, [0, 1]),           # Basic case
@@ -64,3 +70,11 @@ def run_tests():
 
 if __name__ == "__main__":
     run_tests()
+
+
+# soltion 1
+# for i in range(len(nums)):
+#         remainder = target - nums[i]
+
+#         if remainder in nums[i+1:]:
+#             return [i,nums.index(remainder, i+1)]

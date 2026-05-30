@@ -9,11 +9,10 @@ def encode(strs):
         Single encoded string
     """
     # Your code here
-    encoded = ''
-    for item in strs:
-        n = len(item)
-        encoded += f'{n}@{item}'
-
+    encoded = []
+    for word in strs:
+        n = len(word)
+        encoded.append(f'{n}#{word}')
     return encoded
 
 
@@ -31,18 +30,15 @@ def decode(s):
     decoded = []
     i=0
     while i < len(s):
-        j=i
-        while s[j] != '@':
-            j += 1
-        L = int(s[i:j])
-        word = s[j+1:j+L+1]
-        decoded.append(word)
-        i = L + j +1
-    return decoded
-
-
-
-
+        if s[i] == '#' and s[i-1].isdigit():
+            j=i
+            n = s[i-1]
+            while s[j] != '#':
+                j+=1
+                word = s[j: j+n + 1]
+                decode.append(word)
+                i = j + n + 1
+    return decoded   
 # Test cases
 if __name__ == "__main__":
     # Test 1: Basic case
@@ -98,3 +94,23 @@ if __name__ == "__main__":
     print(f"Encoded: {encoded6}")
     print(f"Decoded: {decoded6}")
     print(f"Pass: {test6 == decoded6}\n")
+
+
+#         encoded = ''
+#     for item in strs:
+#         n = len(item)
+#         encoded += f'{n}@{item}'
+
+#     return encoded
+#  decoded = []
+#     i=0
+#     while i < len(s):
+#         j=i
+#         while s[j] != '@':
+#             j += 1
+#         L = int(s[i:j])
+#         word = s[j+1:j+L+1]
+#         decoded.append(word)
+#         i = L + j +1
+#     return decoded
+

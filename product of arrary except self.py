@@ -2,18 +2,16 @@ import math
 def productExceptSelf(nums):
     # Your solution goes here
 
-    za_output = []
-    
+    za_product = []
+    total = math.prod(nums)
     for i in range(len(nums)):
-        lefty = math.prod(nums[:i])
-        righty = math.prod(nums[i+1:])
-
-        prody = lefty * righty
-
-        za_output.append(prody)
-        # print(za_output, prody, lefty, righty)
-
-    return za_output
+        number = nums[i]
+        if number == 0:
+            left = math.prod(nums[0:i])
+            right = math.prod(nums[i+1:range(nums)])
+            za_product.append(left+right)
+        else: za_product.append(total / number)
+    return za_product
 
 
 # Test cases
@@ -36,3 +34,16 @@ def test_productExceptSelf():
 
 # Run tests
 test_productExceptSelf()
+
+    # za_output = []
+    
+    # for i in range(len(nums)):
+    #     lefty = math.prod(nums[:i])
+    #     righty = math.prod(nums[i+1:])
+
+    #     prody = lefty * righty
+
+    #     za_output.append(prody)
+    #     # print(za_output, prody, lefty, righty)
+
+    # return za_output

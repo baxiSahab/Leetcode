@@ -7,10 +7,11 @@ def topKFrequent(nums, k):
     
     Your solution goes here!
     """
-    
-    counted = Counter(nums)
-    return [ x[0] for x in sorted(counted.items() , key = lambda x:x[1], reverse=True)[:k] ]
-
+    counter_dict = {}    
+    for number in nums:
+        if number not in counter_dict: counter_dict[number] = 0
+        counter_dict[number]+=1
+    return list ( sorted ( counter_dict , key=lambda x: counter_dict[x] , reverse=True)[:k] )
 
 # Test cases
 test_cases = [
@@ -87,3 +88,6 @@ for i, test in enumerate(test_cases, 1):
 print("\n" + "=" * 70)
 print(f"Results: {passed} passed, {failed} failed out of {len(test_cases)} tests")
 print("=" * 70)
+
+# counted = Counter(nums)
+# return [ x[0] for x in sorted(counted.items() , key = lambda x:x[1], reverse=True)[:k] ]
