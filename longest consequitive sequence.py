@@ -8,29 +8,45 @@ def longestConsecutive(nums):
     Returns:
         Integer representing the length of the longest consecutive sequence
     """
-    # YOUR CODE HERE
-    count = 0
-    max_count = [0]
-    nums=sorted(nums)
+    # YOUR CODE HERE   
+    nums = sorted(set(nums))  # dedup + sort
+    if not nums: return 0     # correct empty check
 
-    if not nums: # base case empty
-        return 0
-    
+    maxcount = []
+    count = 1
+
     for i in range(len(nums) - 1):
-
-        if nums[i] == nums[i+1]: # deosnt break streak if 0,0,1 or 9,10,10,11
-            continue
-
-        elif  nums[i+1] != nums[i] + 1:  # if mul. seq, saves all of them
-            max_count.append(count)
-            count = 0
-
-            # print(max_count,count)
+        if nums[i+1] == nums[i] + 1:
+            count += 1
         else:
-            count+=1
+            maxcount.append(count)
+            count = 1            # reset to 1, not 0
 
-    max_count.append(count) # saves last count if it lasts till end of array
-    return max(max_count)+1 # accounting for missing the count for first 2 of a seq.
+    maxcount.append(count)       # don't forget last streak
+    return max(maxcount)
+    # -------------------------
+    # count = 0
+    # max_count = [0]
+    # nums=sorted(nums)
+
+    # if not nums: # base case empty
+    #     return 0
+    
+    # for i in range(len(nums) - 1):
+
+    #     if nums[i] == nums[i+1]: # deosnt break streak if 0,0,1 or 9,10,10,11
+    #         continue
+
+    #     elif  nums[i+1] != nums[i] + 1:  # if mul. seq, saves all of them
+    #         max_count.append(count)
+    #         count = 0
+
+    #         # print(max_count,count)
+    #     else:
+    #         count+=1
+
+    # max_count.append(count) # saves last count if it lasts till end of array
+    # return max(max_count)+1 # accounting for missing the count for first 2 of a seq.
 
 # Test cases
 def test_longestConsecutive():

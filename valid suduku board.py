@@ -1,60 +1,37 @@
 def isValidSudoku(board):
-    """
-    Determine if a 9 x 9 Sudoku board is valid.
-    Only the filled cells need to be validated according to the following rules:
-    1. Each row must contain the digits 1-9 without repetition.
-    2. Each column must contain the digits 1-9 without repetition.
-    3. Each of the nine 3 x 3 sub-boxes of the grid must contain the digits 1-9 without repetition.
     
-    The Sudoku board may be partially filled, where empty cells are represented by '.'.
     
-    Args:
-        board: List[List[str]] - 9x9 grid where '.' represents empty cells
-    
-    Returns:
-        bool - True if board is valid, False otherwise
-    """
-    # TODO: Add your solution here
-   
+    row_set = []
     for i in range(9):
-        row_set = set()
         for j in range(9):
-            if board[i][j] == '.':
-               continue 
-            if board[i][j] in row_set:
-                return False
-            else:
-                row_set.add(board[i][j])
+            item = board[i][j]
+            if item in row_set: return False
+            if item == '.': continue
+            row_set.append(item)
+        row_set = []
+    
+    col_set = []
+    for j in range(9):
+        for i in range(9):
+            item = board[i][j]
+            if item in col_set: return False
+            if item == '.': continue
+            col_set.append(item)
+        col_set = []
 
-    col_set = ()
+    box_set = []
 
-    for i in range(9):
-        col_set = set()
-        for j in range(9):
-            if board[j][i] == '.':
-               continue 
-            if board[j][i] in col_set:
-                return False
-            else: 
-                col_set.add(board[j][i])
+    for box_n in range(9):
+        row_start = (box_n // 3 )*3
+        col_start = (box_n %3)*3
 
-    for box in range(9):
-        box_set = set()
-
-        row_start = (box // 3) * 3
-        col_start = (box % 3) * 3
-
-        for i in range(row_start, row_start+3):
-
-            for j in range(col_start, col_start+3):
-
-                if board[i][j] == '.':
-                    continue
-                if board[i][j] in box_set:
-                    return False
-                else:
-                    box_set.add(board[i][j])
-
+        for i in range(row_start , row_start + 3):
+            for j in range(col_start , col_start + 3):
+                item = board[i][j]
+                if item in box_set: return False
+                if item == '.': continue
+                box_set.append(item)
+        box_set = []
 
     return True
     
@@ -160,3 +137,48 @@ def run_tests():
 
 if __name__ == "__main__":
     run_tests()
+
+
+    #  # TODO: Add your solution here
+   
+    # for i in range(9):
+    #     row_set = set()
+    #     for j in range(9):
+    #         if board[i][j] == '.':
+    #            continue 
+    #         if board[i][j] in row_set:
+    #             return False
+    #         else:
+    #             row_set.add(board[i][j])
+
+    # col_set = ()
+
+    # for i in range(9):
+    #     col_set = set()
+    #     for j in range(9):
+    #         if board[j][i] == '.':
+    #            continue 
+    #         if board[j][i] in col_set:
+    #             return False
+    #         else: 
+    #             col_set.add(board[j][i])
+
+    # for box in range(9):
+    #     box_set = set()
+
+    #     row_start = (box // 3) * 3
+    #     col_start = (box % 3) * 3
+
+    #     for i in range(row_start, row_start+3):
+
+    #         for j in range(col_start, col_start+3):
+
+    #             if board[i][j] == '.':
+    #                 continue
+    #             if board[i][j] in box_set:
+    #                 return False
+    #             else:
+    #                 box_set.add(board[i][j])
+
+
+    # return True

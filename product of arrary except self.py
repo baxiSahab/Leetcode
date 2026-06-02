@@ -9,7 +9,7 @@ def productExceptSelf(nums):
         if number == 0:
             left = math.prod(nums[0:i])
             right = math.prod(nums[i+1:range(nums)])
-            za_product.append(left+right)
+            za_product.append(left * right)
         else: za_product.append(total / number)
     return za_product
 
