@@ -1,29 +1,38 @@
 def maxArea(heights: list[int]) -> int:
-    max_area = 0
-    N = len(heights)
-    i=0
-    j=N-1
-    while i < j:
+    max_water = 0
+    right = len(heights)-1
+    left = 0
+    while right > left:
+        water = (right - left) * min(heights[right] , heights[left])
+        max_water = max(max_water , water)
+        if heights[right] < heights[left]: right-=1
+        else: left+=1
+    return max_water
+    # max_area = 0
+    # N = len(heights)
+    # i=0
+    # j=N-1
+    # while i < j:
 
-        area = (j-i) * min( heights[j] , heights[i] )
-        if max_area<area:
-            max_area=area
+    #     area = (j-i) * min( heights[j] , heights[i] )
+    #     if max_area<area:
+    #         max_area=area
 
-        if heights[j] > heights[i]:
-            i+=1
-            # j+=i
-        else:
-            j-=1
-    return max_area
-# Test 1: Basic case
-assert maxArea([1,8,6,2,5,4,8,3,7]) == 49
-# Test 2: Two elements
-assert maxArea([1,1]) == 1
-# Test 3: Decreasing heights
-assert maxArea([4,3,2,1]) == 4
-# Test 4: Large gap with small heights
-assert maxArea([2,3,4,5,18,17,6]) == 17
-# Test 5: All same height
-assert maxArea([5,5,5,5]) == 15
+    #     if heights[j] > heights[i]:
+    #         i+=1
+    #         # j+=i
+    #     else:
+    #         j-=1
+    # return max_area
+test_cases = [
+    ([1,8,6,2,5,4,8,3,7], 49),
+    ([1,1], 1),
+    ([4,3,2,1,4], 16),
+    ([1,2,1], 2),
+    ([1,8,100,2,100,4,8,3,7], 200),
+]
 
-print("All tests passed!")
+for height, expected in test_cases:
+    result = maxArea(height)
+    assert result == expected, f"Input: {height}, Expected: {expected}, Got: {result}"
+    print(f"✓ PASS: {height} -> {result}")

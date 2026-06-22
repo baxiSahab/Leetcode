@@ -1,26 +1,32 @@
 def checkInclusion(s1: str, s2: str) -> bool:
 
-    left , n , N ,  s1_dict= 0 , len(s1), len(s2) , {char: s1.count(char) for char in set(s1)}
+    left , n , N, freq = 0 , len(s1), len(s2), {char: s1.count(char) for char in set(s1)}
     right = left + n
+    for right in range(N):
+        char = s2[left]z
+        
+    # -----------
+    # left , n , N ,  s1_dict= 0 , len(s1), len(s2) , {char: s1.count(char) for char in set(s1)}
+    # right = left + n
 
-    if n > N:
-        return False
-    if s1 == s2:
-        return True
-    while right <= N:
-        temp_dict = { char: s2[left:right].count(char) for char in set(s2[left:right]) }
-        # print(s1_dict , temp_dict, left, right)
+    # if n > N:
+    #     return False
+    # if s1 == s2:
+    #     return True
+    # while right <= N:
+    #     temp_dict = { char: s2[left:right].count(char) for char in set(s2[left:right]) }
+    #     # print(s1_dict , temp_dict, left, right)
 
-        if temp_dict == s1_dict:
-            # print(temp_dict,'1')
-            return True
-        else:
-            # print(temp_dict,'2')
-            left+=1
-            # if left+n < N:
-            right = left + n
+    #     if temp_dict == s1_dict:
+    #         # print(temp_dict,'1')
+    #         return True
+    #     else:
+    #         # print(temp_dict,'2')
+    #         left+=1
+    #         # if left+n < N:
+    #         right = left + n
 
-    return False
+    # return False
 
 
 # Test cases

@@ -2,33 +2,56 @@ def threeSum(nums):
     # YOUR SOLUTION HERE
     nums.sort()
     N = len(nums)
-    answer = []
+    output =[]
     for i in range(N):
+        target = -nums[i]
         left = i+1
-        right = N - 1
-        target = nums[i]
-        if i > 0 and nums[i] == nums[i-1]:
-            continue
+        right = N-1
+        if i>0 and nums[i] == nums[i-1]: continue
         while left < right:
-            two_sum =  -(nums[left] + nums[right])
-            if target == two_sum:
-                answer.append([nums[i] , nums[left], nums[right]])
-
-                while left<right and nums[right] == nums[right-1]:
-                    right-=1
-
-                while left < right and nums[left] == nums[left+1]:
-                    left+=1
+        
+            if nums[left] + nums[right] == target:
+                output.append([nums[left],nums[right],nums[i]])
                 left+=1
                 right-=1
-            elif target < two_sum:
-                # print(right)
-                left+=1
-            elif target > two_sum:
-                # print(left)
-                right-=1
-    return answer
-            # print(left,right)
+                while left+1<=right and nums[left] == nums[left-1]: left+=1
+                while right>=left+1 and nums[right] == nums[right+1]: right-=1
+            elif nums[left] + nums[right] > target: right-=1
+            elif nums[left] + nums[right] < target: left+=1
+            
+    return output
+ 
+
+    
+    # nums.sort()
+    # N = len(nums)
+    # answer = []
+    # for i in range(N):
+    #     left = i+1
+    #     right = N - 1
+    #     target = nums[i]
+    #     if i > 0 and nums[i] == nums[i-1]:
+    #         continue
+    #     while left < right:
+    #         two_sum =  -(nums[left] + nums[right])
+    #         if target == two_sum:
+    #             answer.append([nums[i] , nums[left], nums[right]])
+
+    #             while left<right and nums[right] == nums[right-1]:
+    #                 right-=1
+
+    #             while left < right and nums[left] == nums[left+1]:
+    #                 left+=1
+    #             left+=1
+    #             right-=1
+    #         elif target < two_sum:
+    #             # print(right)
+    #             left+=1
+    #         elif target > two_sum:
+    #             # print(left)
+    #             right-=1
+    # return answer
+            # print(left ,right)
 
 # Test cases
 def run_tests():
